@@ -9,6 +9,11 @@ def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
     #subscribe to the ultrasonic ranger topic here
+    client.subscribe("anrg-pi7/ultrasonicRanger")
+    client.publish("anrg-pi7/ultrasonicRanger", distance)
+
+
+def custom_callback()
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -23,7 +28,7 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        print("delete this line")
+        # print("delete this line")
         time.sleep(1)
             
 
