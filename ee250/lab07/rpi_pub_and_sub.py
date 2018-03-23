@@ -7,7 +7,7 @@ import grovepi
 from grovepi import *
 import time
 from grovepi import *
-# from grovepi_rgb_lcd import *
+from grovepi_rgb_lcd import *
 
 global ultrasonicPIN, ledPIN, buttonPIN
 ultrasonicPIN = 4
