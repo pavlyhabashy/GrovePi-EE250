@@ -6,8 +6,7 @@ import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
 import time
-from grovepi import *
-from grovepi_rgb_lcd import *
+from grove_rgb_lcd import *
 
 global ultrasonicPIN, ledPIN, buttonPIN
 ultrasonicPIN = 4
