@@ -9,7 +9,7 @@ import time
 
 global ultrasonicPIN, ledPIN, buttonPIN
 ultrasonicPIN = 4
-ledPIN = 7
+ledPIN = 3
 buttonPIN = 2
 # lcdPIN = #
 
