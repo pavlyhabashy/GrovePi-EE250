@@ -69,7 +69,7 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        distance = str(grovepi.ultrasonicRead(ultrasonicPIN))
+        distance = grovepi.ultrasonicRead(4)
         print(distance)
         # client.publish("anrg-pi7/ultrasonicRanger", str(grovepi.ultrasonicRead(ultrasonicPIN))
         time.sleep(1)
