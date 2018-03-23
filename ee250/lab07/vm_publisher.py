@@ -38,7 +38,7 @@ def on_press(key):
         # send "d" character to rpi
         client.publish("anrg-pi7/lcd", "d")
         # send "LED_OFF"
-        client.publish("anrg-pi7/lcd", "LED_OFF")
+        client.publish("anrg-pi7/led", "LED_OFF")
 
 if __name__ == '__main__':
     #setup the keyboard event listener
