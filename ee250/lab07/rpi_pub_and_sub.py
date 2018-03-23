@@ -21,7 +21,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("anrg-pi7/led", led_callback)
 
     client.subscribe("anrg-pi7/lcd")
-    client.message_callback_add("anrg-pi7/lcd", lec_callback)
+    client.message_callback_add("anrg-pi7/lcd", lcd_callback)
 
 def led_callback(client, userdata, message):
     # try:
