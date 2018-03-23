@@ -6,12 +6,13 @@ import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
 import time
+from grovepi import *
+from grovepi_rgb_lcd import *
 
 global ultrasonicPIN, ledPIN, buttonPIN
 ultrasonicPIN = 4
 ledPIN = 3
 buttonPIN = 2
-# lcdPIN = #
 
 
 def on_connect(client, userdata, flags, rc):
@@ -45,18 +46,22 @@ def lcd_callback(client, userdata, message):
     if str(message.payload, "utf-8") == "w":
         # Write to LCD
         print("w");
+        setText("w")
 
     elif str(message.payload, "utf-8") == "a":
         # Write to LCD
         print("a")
+        setText("a")
 
     elif str(message.payload, "utf-8") == "s":
         # Write to LCD
         print("s")
+        setText("s")
 
     elif str(message.payload, "utf-8") == "d":
         # Write to LCD
         print("d")
+        setText("d")
 
 # Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
