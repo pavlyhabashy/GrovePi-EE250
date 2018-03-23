@@ -9,7 +9,7 @@ import time
 
 global ultrasonicPIN, ledPIN, buttonPIN
 ultrasonicPIN = 4
-ledPIN = 3
+ledPIN = 7
 buttonPIN = 2
 # lcdPIN = #
 
@@ -68,6 +68,7 @@ if __name__ == '__main__':
     client.on_connect = on_connect
     client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
     client.loop_start()
+    pinMode(ledPIN,"OUTPUT")
 
     while True:
         distance = ultrasonicRead(ultrasonicPIN)
