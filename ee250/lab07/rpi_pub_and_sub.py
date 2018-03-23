@@ -69,9 +69,9 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        distance = str(grovepi.ultrasonicRead(ultrasonicPIN))
-        print(distance)
-        client.publish("anrg-pi7/ultrasonicRanger", distance)
+        # distance = str(grovepi.ultrasonicRead(ultrasonicPIN))
+        # print(distance)
+        client.publish("anrg-pi7/ultrasonicRanger", grovepi.ultrasonicRead(ultrasonicPIN))
         time.sleep(1)
 
         # If button is pressed
