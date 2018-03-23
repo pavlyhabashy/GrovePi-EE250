@@ -70,13 +70,14 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        distance = ultrasonicRead(4)
+        distance = ultrasonicRead(ultrasonicPIN)
         print(str(distance))
-        # client.publish("anrg-pi7/ultrasonicRanger", str(grovepi.ultrasonicRead(ultrasonicPIN))
+        client.publish("anrg-pi7/ultrasonicRanger", distance)
         time.sleep(1)
 
         # If button is pressed
         if (grovepi.digitalRead(2) > 0):
+            print("Button Pressed")
             # Publish the string "Button pressed!" to “anrg-pi#/button”
             client.publish("anrg-pi7/button", "Button pressed!")
             
