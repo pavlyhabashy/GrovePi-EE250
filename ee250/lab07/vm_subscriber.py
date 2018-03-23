@@ -9,20 +9,16 @@ def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
     client.subscribe("anrg-pi7/ultrasonicRanger")
-    # Custom callback
+    client.message_callback_add("anrg-pi7/led", ultrasonic_callback)
 
     client.subscribe("anrg-pi7/button")
-    # Custom callback
+    client.message_callback_add("anrg-pi7/led", button_callback)
 
 def ultrasonic_callback(client, userdata, message):
-    print("custom_callback: " + message.topic + " " + str(message.payload))
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
+    print("Ultrasonic: " + str(message.payload))
 
 def button_callback(client, userdata, message):
-    print("custom_callback: " + message.topic + " " + str(message.payload))
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
+    print(str(message.payload, 'utf-8'))
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -37,7 +33,6 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        # print("delete this line")
         time.sleep(1)
             
 

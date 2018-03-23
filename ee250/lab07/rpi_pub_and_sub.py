@@ -10,6 +10,7 @@ global ultrasonicPIN, ledPIN, buttonPIN
 ultrasonicPIN = 4
 ledPIN = 3
 buttonPIN = 2
+# lcdPIN = #
 
 
 def on_connect(client, userdata, flags, rc):
@@ -17,23 +18,39 @@ def on_connect(client, userdata, flags, rc):
 
     #subscribe to topics of interest here
     client.subscribe("anrg-pi7/led")
-    # Custom callback
+    client.message_callback_add("anrg-pi7/led", led_callback)
 
     client.subscribe("anrg-pi7/lcd")
-    # Custom callback
-
-    client.publish("anrg-pi7/ultrasonicRanger", distance)
+    client.message_callback_add("anrg-pi7/lcd", lec_callback)
 
 def led_callback(client, userdata, message):
-    #the third argument is 'message' here unlike 'msg' in on_message 
-    print("custom_callback: " + message.topic + " " + str(message.payload))
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
+    try:
+
+    except:
+
+
+    if str(message.payload) == "LED_ON":
+        # Turn on LED
+        digitalWrite(ledPIN, 1)
+        print("LED_ON")
+    elif str(message.payload) == "LED_OFF":
+        # Turn off LED
+        digitalWrite(ledPIN, 0)
+        print("LED_ON")
 
 def lcd_callback(client, userdata, message):
-    print("custom_callback: " + message.topic + " " + str(message.payload))
-    print("custom_callback: message.payload is of type " + 
-          str(type(message.payload)))
+
+    if str(message.payload) == "w":
+        # Write to LCD
+
+    elif str(message.payload) == "a":
+        # Write to LCD
+
+    elif str(message.payload) == "s":
+        # Write to LCD
+
+    elif str(message.payload) == "d":
+        # Write to LCD
 
 # Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -54,6 +71,7 @@ if __name__ == '__main__':
         time.sleep(1)
 
         # If button is pressed
+        if grovepi.digitalOutput(2) > 0:
             # Publish the string "Button pressed!" to “anrg-pi#/button”
             client.publish("anrg-pi7/button", "Button pressed!")
             

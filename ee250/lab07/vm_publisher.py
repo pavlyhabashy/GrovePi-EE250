@@ -9,13 +9,6 @@ from pynput import keyboard
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    #subscribe to topics of interest here
-    client.subscribe("anrg-pi7/led")
-    client.message_callback_add("anrg-pi7/led", LED)
-
-    client.subscribe("anrg-pi7/lcd")
-    client.message_callback_add("anrg-pi7/lcd", LCD)
-
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload))
@@ -29,23 +22,23 @@ def on_press(key):
     if k == 'w':
         print("w")
         #send "w" character to rpi
-        client.publish("anrg-pi7/LCD", "w")
+        client.publish("anrg-pi7/lcd", "w")
     elif k == 'a':
         print("a")
         # send "a" character to rpi
-        client.publish("anrg-pi7/LCD", "a")
+        client.publish("anrg-pi7/lcd", "a")
         #send "LED_ON"
-        client.publish("anrg-pi7/LED", "LED_ON")
+        client.publish("anrg-pi7/led", "LED_ON")
     elif k == 's':
         print("s")
         # send "s" character to rpi
-        client.publish("anrg-pi7/LCD", "s")
+        client.publish("anrg-pi7/lcd", "s")
     elif k == 'd':
         print("d")
         # send "d" character to rpi
-        client.publish("anrg-pi7/LCD", "d")
+        client.publish("anrg-pi7/lcd", "d")
         # send "LED_OFF"
-        client.publish("anrg-pi7/LED", "LED_OFF")
+        client.publish("anrg-pi7/lcd", "LED_OFF")
 
 if __name__ == '__main__':
     #setup the keyboard event listener
