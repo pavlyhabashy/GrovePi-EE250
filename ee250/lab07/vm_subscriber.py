@@ -8,12 +8,21 @@ import time
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
-    #subscribe to the ultrasonic ranger topic here
     client.subscribe("anrg-pi7/ultrasonicRanger")
-    client.publish("anrg-pi7/ultrasonicRanger", distance)
+    # Custom callback
 
+    client.subscribe("anrg-pi7/button")
+    # Custom callback
 
-def custom_callback()
+def ultrasonic_callback(client, userdata, message):
+    print("custom_callback: " + message.topic + " " + str(message.payload))
+    print("custom_callback: message.payload is of type " + 
+          str(type(message.payload)))
+
+def button_callback(client, userdata, message):
+    print("custom_callback: " + message.topic + " " + str(message.payload))
+    print("custom_callback: message.payload is of type " + 
+          str(type(message.payload)))
 
 #Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):

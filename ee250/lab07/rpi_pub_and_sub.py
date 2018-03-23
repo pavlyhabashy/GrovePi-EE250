@@ -17,25 +17,27 @@ def on_connect(client, userdata, flags, rc):
 
     #subscribe to topics of interest here
     client.subscribe("anrg-pi7/led")
-    client.message_callback_add("anrg-pi7/led", LED)
+    # Custom callback
 
     client.subscribe("anrg-pi7/lcd")
-    client.message_callback_add("anrg-pi7/lcd", LCD)
+    # Custom callback
 
     client.publish("anrg-pi7/ultrasonicRanger", distance)
 
-
-def custom_callback(client, userdata, message):
+def led_callback(client, userdata, message):
     #the third argument is 'message' here unlike 'msg' in on_message 
     print("custom_callback: " + message.topic + " " + str(message.payload))
     print("custom_callback: message.payload is of type " + 
           str(type(message.payload)))
 
+def lcd_callback(client, userdata, message):
+    print("custom_callback: " + message.topic + " " + str(message.payload))
+    print("custom_callback: message.payload is of type " + 
+          str(type(message.payload)))
 
-#Default message callback. Please use custom callbacks.
-
-# def on_message(client, userdata, msg):
-#     print("on_message: " + msg.topic + " " + str(msg.payload))
+# Default message callback. Please use custom callbacks.
+def on_message(client, userdata, msg):
+    print("on_message: " + msg.topic + " " + str(msg.payload))
 
 if __name__ == '__main__':
     #this section is covered in publisher_and_subscriber_example.py
@@ -46,10 +48,13 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        # print("delete this line")
         distance = str(grovepi.ultrasonicRead(ultrasonicPIN))
         print(distance)
         client.publish("anrg-pi7/ultrasonicRanger", distance)
         time.sleep(1)
+
+        # If button is pressed
+            # Publish the string "Button pressed!" to “anrg-pi#/button”
+            client.publish("anrg-pi7/button", "Button pressed!")
             
 
