@@ -4,6 +4,7 @@ Run rpi_pub_and_sub.py on your Raspberry Pi."""
 
 import paho.mqtt.client as mqtt
 import grovepi
+from grovepi import *
 import time
 
 global ultrasonicPIN, ledPIN, buttonPIN
@@ -69,7 +70,7 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        distance = grovepi.ultrasonicRead(4)
+        distance = ultrasonicRead(4)
         print(str(distance))
         # client.publish("anrg-pi7/ultrasonicRanger", str(grovepi.ultrasonicRead(ultrasonicPIN))
         time.sleep(1)
