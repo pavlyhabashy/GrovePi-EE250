@@ -76,7 +76,7 @@ if __name__ == '__main__':
         time.sleep(1)
 
         # If button is pressed
-        if grovepi.digitalOutput(2) > 0:
+        if (grovepi.digitalOutput(2) > 0):
             # Publish the string "Button pressed!" to “anrg-pi#/button”
             client.publish("anrg-pi7/button", "Button pressed!")
             
