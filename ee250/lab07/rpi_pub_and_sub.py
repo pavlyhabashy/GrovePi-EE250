@@ -76,7 +76,7 @@ if __name__ == '__main__':
     client.loop_start()
     pinMode(ledPIN,"OUTPUT")
     time.sleep(1)
-
+    setRGB(100,100,100)
     while True:
         distance = ultrasonicRead(ultrasonicPIN)
         print(str(distance))
