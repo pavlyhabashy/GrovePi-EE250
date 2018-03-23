@@ -25,11 +25,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("anrg-pi7/lcd", lcd_callback)
 
 def led_callback(client, userdata, message):
-    global ledPIN
-    # try:
-
-    # except:
-
+    # global ledPIN
 
     if str(message.payload, "utf-8") == "LED_ON":
         # Turn on LED
@@ -75,7 +71,7 @@ if __name__ == '__main__':
     client.loop_start()
     pinMode(ledPIN,"OUTPUT")
     time.sleep(1)
-    setRGB(100,100,100)
+    setRGB(250,250,250)
     while True:
         distance = ultrasonicRead(ultrasonicPIN)
         print(str(distance))
@@ -84,7 +80,7 @@ if __name__ == '__main__':
 
         # If button is pressed
         if (grovepi.digitalRead(2) > 0):
-            print("Button Pressed")
+            # print("Button Pressed")
             # Publish the string "Button pressed!" to “anrg-pi#/button”
             client.publish("anrg-pi7/button", "Button pressed!")
             

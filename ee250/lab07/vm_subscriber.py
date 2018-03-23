@@ -15,7 +15,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("anrg-pi7/led", button_callback)
 
 def ultrasonic_callback(client, userdata, message):
-    print("Ultrasonic: " + str(message.payload))
+    print(str(message.payload))
 
 def button_callback(client, userdata, message):
     print(str(message.payload, "utf-8"))
