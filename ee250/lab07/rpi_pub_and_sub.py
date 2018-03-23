@@ -45,7 +45,7 @@ def lcd_callback(client, userdata, message):
 
     if str(message.payload, "utf-8") == "w":
         # Write to LCD
-        print("w");
+        print("w")
         setText("w")
 
     elif str(message.payload, "utf-8") == "a":
