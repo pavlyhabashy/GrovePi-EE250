@@ -24,33 +24,37 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("anrg-pi7/lcd", lec_callback)
 
 def led_callback(client, userdata, message):
-    try:
+    # try:
 
-    except:
+    # except:
 
 
-    if str(message.payload) == "LED_ON":
+    if str(message.payload, "utf-8") == "LED_ON":
         # Turn on LED
         digitalWrite(ledPIN, 1)
         print("LED_ON")
-    elif str(message.payload) == "LED_OFF":
+    elif str(message.payload, "utf-8") == "LED_OFF":
         # Turn off LED
         digitalWrite(ledPIN, 0)
         print("LED_ON")
 
 def lcd_callback(client, userdata, message):
 
-    if str(message.payload) == "w":
+    if str(message.payload, "utf-8") == "w":
         # Write to LCD
+        print("w");
 
-    elif str(message.payload) == "a":
+    elif str(message.payload, "utf-8") == "a":
         # Write to LCD
+        print("a")
 
-    elif str(message.payload) == "s":
+    elif str(message.payload, "utf-8") == "s":
         # Write to LCD
+        print("s")
 
-    elif str(message.payload) == "d":
+    elif str(message.payload, "utf-8") == "d":
         # Write to LCD
+        print("d")
 
 # Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
