@@ -25,6 +25,7 @@ def on_connect(client, userdata, flags, rc):
     client.message_callback_add("anrg-pi7/lcd", lcd_callback)
 
 def led_callback(client, userdata, message):
+    global ledPIN
     # try:
 
     # except:
@@ -69,6 +70,7 @@ if __name__ == '__main__':
     client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
     client.loop_start()
     pinMode(ledPIN,"OUTPUT")
+    time.sleep(1)
 
     while True:
         distance = ultrasonicRead(ultrasonicPIN)
