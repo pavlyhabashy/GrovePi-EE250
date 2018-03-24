@@ -1,7 +1,3 @@
-"""EE 250L Lab 07 Skeleton Code
-
-Run vm_publisher.py in a separate terminal on your VM."""
-
 import paho.mqtt.client as mqtt
 import time
 from pynput import keyboard
@@ -20,20 +16,24 @@ def on_press(key):
         k = key.name # other keys
     
     if k == 'w':
+        # Print locally on console
         print("w")
         #send "w" character to rpi
         client.publish("anrg-pi7/lcd", "w")
     elif k == 'a':
+        # Print locally on console
         print("a")
         # send "a" character to rpi
         client.publish("anrg-pi7/lcd", "a")
-        #send "LED_ON"
+        # send "LED_ON"
         client.publish("anrg-pi7/led", "LED_ON")
     elif k == 's':
+        # Print locally on console
         print("s")
         # send "s" character to rpi
         client.publish("anrg-pi7/lcd", "s")
     elif k == 'd':
+        # Print locally on console
         print("d")
         # send "d" character to rpi
         client.publish("anrg-pi7/lcd", "d")
@@ -53,7 +53,6 @@ if __name__ == '__main__':
     client.loop_start()
 
     while True:
-        # print("delete this line")
         time.sleep(1)
             
 

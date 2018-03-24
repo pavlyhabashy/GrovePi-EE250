@@ -1,7 +1,3 @@
-"""EE 250L Lab 07 Skeleton Code
-
-Run rpi_pub_and_sub.py on your Raspberry Pi."""
-
 import paho.mqtt.client as mqtt
 import grovepi
 from grovepi import *
@@ -13,19 +9,8 @@ ultrasonicPIN = 4
 ledPIN = 3
 buttonPIN = 2
 
-
-def on_connect(client, userdata, flags, rc):
-    print("Connected to server (i.e., broker) with result code "+str(rc))
-
-    #subscribe to topics of interest here
-    client.subscribe("anrg-pi7/led")
-    client.message_callback_add("anrg-pi7/led", led_callback)
-
-    client.subscribe("anrg-pi7/lcd")
-    client.message_callback_add("anrg-pi7/lcd", lcd_callback)
-
+# LED callback
 def led_callback(client, userdata, message):
-    # global ledPIN
 
     if str(message.payload, "utf-8") == "LED_ON":
         # Turn on LED
@@ -35,28 +20,31 @@ def led_callback(client, userdata, message):
         # Turn off LED
         digitalWrite(ledPIN, 0)
         print("LED_OFF")
-
+# LCD callback
 def lcd_callback(client, userdata, message):
-
     if str(message.payload, "utf-8") == "w":
-        # Write to LCD
         print("w")
         setText("w")
-
     elif str(message.payload, "utf-8") == "a":
-        # Write to LCD
         print("a")
         setText("a")
-
     elif str(message.payload, "utf-8") == "s":
-        # Write to LCD
         print("s")
         setText("s")
-
     elif str(message.payload, "utf-8") == "d":
-        # Write to LCD
         print("d")
         setText("d")
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected to server (i.e., broker) with result code "+str(rc))
+
+    # Subscribe to LED
+    client.subscribe("anrg-pi7/led")
+    client.message_callback_add("anrg-pi7/led", led_callback)
+
+    # Subscribe to LED
+    client.subscribe("anrg-pi7/lcd")
+    client.message_callback_add("anrg-pi7/lcd", lcd_callback)
 
 # Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -73,14 +61,16 @@ if __name__ == '__main__':
     time.sleep(1)
     setRGB(250,250,250)
     while True:
+        # Read ultrasonic ranger
         distance = ultrasonicRead(ultrasonicPIN)
+        # Print locally on console
         print(str(distance))
+        # Publish to topic "anrg-pi7/ultrasonicRanger"
         client.publish("anrg-pi7/ultrasonicRanger", distance)
         time.sleep(1)
 
         # If button is pressed
         if (grovepi.digitalRead(2) > 0):
-            # print("Button Pressed")
             # Publish the string "Button pressed!" to “anrg-pi#/button”
             client.publish("anrg-pi7/button", "Button pressed!")
             

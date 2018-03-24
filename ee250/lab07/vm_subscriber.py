@@ -1,23 +1,22 @@
-"""EE 250L Lab 07 Skeleton Code
-
-Run vm_subscriber.py in a separate terminal on your VM."""
-
 import paho.mqtt.client as mqtt
 import time
 
-
+# Ultrasonic ranger callback
 def ultrasonic_callback(client, userdata, message):
     print(str(message.payload, "utf-8"))
 
+# Button callback
 def button_callback(client, userdata, message):
     print(str(message.payload, "utf-8"))
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
 
+    # Subscribe to ultrasonic ranger
     client.subscribe("anrg-pi7/ultrasonicRanger")
     client.message_callback_add("anrg-pi7/ultrasonicRanger", ultrasonic_callback)
 
+    # Subscribe to button
     client.subscribe("anrg-pi7/button")
     client.message_callback_add("anrg-pi7/button", button_callback)
 
