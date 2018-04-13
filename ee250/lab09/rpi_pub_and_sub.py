@@ -64,16 +64,16 @@ def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload))
 
 if __name__ == '__main__':
-    #this section is covered in publisher_and_subscriber_example.py
-    client = mqtt.Client()
-    client.on_message = on_message
-    client.on_connect = on_connect
-    client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
-    client.loop_start()
-    pinMode(ledPIN,"OUTPUT")
-    time.sleep(1)
-    setRGB(250,250,250)
-    while True:
+	#this section is covered in publisher_and_subscriber_example.py
+	client = mqtt.Client()
+	client.on_message = on_message
+	client.on_connect = on_connect
+	client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
+	client.loop_start()
+	pinMode(ledPIN,"OUTPUT")
+	time.sleep(1)
+	setRGB(250,250,250)
+	while True:
 		try:
 			[temp, hum] = dht(dhtPIN, 1)
 			print "temp =", temp, "C\thumidity =", hum, "%"
@@ -81,17 +81,17 @@ if __name__ == '__main__':
 			client.publish("anrg-pi7/humidity", str(hum + "%"))
 		except (IOError, TypeError) as e:
 			print "Error"
-        # Read ultrasonic ranger
-        # distance = ultrasonicRead(ultrasonicPIN)
-        # Print locally on console
-        # print(str(distance))
-        # Publish to topic "anrg-pi7/ultrasonicRanger"
-        # client.publish("anrg-pi7/ultrasonicRanger", distance)
-        time.sleep(1)
+		# Read ultrasonic ranger
+		# distance = ultrasonicRead(ultrasonicPIN)
+		# Print locally on console
+		# print(str(distance))
+		# Publish to topic "anrg-pi7/ultrasonicRanger"
+		# client.publish("anrg-pi7/ultrasonicRanger", distance)
+		time.sleep(1)
 
-        # If button is pressed
-        # if (grovepi.digitalRead(2) > 0):
-        #     # Publish the string "Button pressed!" to “anrg-pi#/button”
-        #     client.publish("anrg-pi7/button", "Button pressed!")
+		# If button is pressed
+		# if (grovepi.digitalRead(2) > 0):
+		#     # Publish the string "Button pressed!" to “anrg-pi#/button”
+		#     client.publish("anrg-pi7/button", "Button pressed!")
             
 
