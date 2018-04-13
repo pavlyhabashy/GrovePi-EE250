@@ -12,13 +12,13 @@ dhtPIN = 7
 
 # LED callback
 def led_callback(client, userdata, message):
-    print("LED button press")
+    # print("LED button press")
     print(str(message.payload, "utf-8"))
     if (str(message.payload, "utf-8") == "LED_toggle"):
         if (digitalRead(ledPIN) == 1):
-            digitlaWrite(ledPIN, 0)
+            digitalWrite(ledPIN, 0)
         else:
-            digitlaWrite(ledPIN, 1)
+            digitalWrite(ledPIN, 1)
 
     # if str(message.payload, "utf-8") == "LED_ON":
     #     # Turn on LED
