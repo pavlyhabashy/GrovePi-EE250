@@ -53,7 +53,7 @@ def on_connect(client, userdata, flags, rc):
 
     # Subscribe to LCD
     client.subscribe("anrg-pi7/lcd")
-    client.message_callback_add("anrg-pi7/lcd", lcd_callback)
+    client.message_callback_add("anrg-pi7/lcd", lcd_callback) 
 
     # client.subscribe("anrg-pi7/temperature")
     # client.message_callback_add("anrg-pi7/temperature", lcd_callback)
