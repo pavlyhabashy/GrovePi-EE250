@@ -76,11 +76,11 @@ if __name__ == '__main__':
 	while True:
 		try:
 			[temp, hum] = dht(dhtPIN, 1)
-			print "temp =", temp, "C\thumidity =", hum, "%"
+			print ("temp =", temp, "C\thumidity =", hum, "%")
 			client.publish("anrg-pi7/temperature", str(temp + "C"))
 			client.publish("anrg-pi7/humidity", str(hum + "%"))
 		except (IOError, TypeError) as e:
-			print "Error"
+			print ("Error")
 		# Read ultrasonic ranger
 		# distance = ultrasonicRead(ultrasonicPIN)
 		# Print locally on console
