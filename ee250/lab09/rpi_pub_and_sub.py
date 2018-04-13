@@ -12,7 +12,8 @@ dhtPIN = 7
 
 # LED callback
 def led_callback(client, userdata, message):
-    print("LED_toggle")
+    print("LED button press")
+    print(str(message.payload, "utf-8"))
     if (str(message.payload, "utf-8") == "LED_toggle"):
         if (digitalRead(ledPIN) == 1):
             digitlaWrite(ledPIN, 0)
@@ -50,6 +51,7 @@ def on_connect(client, userdata, flags, rc):
     # Subscribe to LED
     client.subscribe("anrg-pi7/led")
     client.message_callback_add("anrg-pi7/led", led_callback)
+    print("Connected to led topic")
 
     # Subscribe to LCD
     client.subscribe("anrg-pi7/lcd")
