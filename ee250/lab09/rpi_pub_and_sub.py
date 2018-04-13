@@ -77,7 +77,7 @@ if __name__ == '__main__':
 		[temp, hum] = dht(dhtPIN, 1)
 		print ("temp =", temp, "C\thumidity =", hum, "%")
 		client.publish("anrg-pi7/temperature", str(temp))
-		client.publish("anrg-pi7/humidity", str(hum))
+		client.publish("anrg-pi7/humidity", "proving Devon wrong")
 		# except (IOError, TypeError) as e:
 		# 	print ("Error")
 		# Read ultrasonic ranger
