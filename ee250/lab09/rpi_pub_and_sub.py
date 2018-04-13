@@ -4,15 +4,12 @@ from grovepi import *
 import time
 from grove_rgb_lcd import *
 
-global ultrasonicPIN, ledPIN, buttonPIN
-# ultrasonicPIN = 4
+global ledPIN, buttonPIN
 ledPIN = 3
 dhtPIN = 7
-# buttonPIN = 2
 
 # LED callback
 def led_callback(client, userdata, message):
-    # print("LED button press")
     print(str(message.payload, "utf-8"))
     if (str(message.payload, "utf-8") == "LED_toggle"):
         if (digitalRead(ledPIN) == 1):
@@ -20,14 +17,6 @@ def led_callback(client, userdata, message):
         elif(digitalRead(ledPIN) == 0):
             digitalWrite(ledPIN, 1)
 
-    # if str(message.payload, "utf-8") == "LED_ON":
-    #     # Turn on LED
-    #     digitalWrite(ledPIN, 1)
-    #     print("LED_ON")
-    # elif str(message.payload, "utf-8") == "LED_OFF":
-    #     # Turn off LED
-    #     digitalWrite(ledPIN, 0)
-    #     print("LED_OFF")
 # LCD callback
 def lcd_callback(client, userdata, message):
 	print(str(message.payload, "utf-8"))
@@ -66,19 +55,5 @@ if __name__ == '__main__':
 		print ("temp =", temp, "C\thumidity =", hum, "%")
 		client.publish("anrg-pi7/temperature", str(temp))
 		client.publish("anrg-pi7/humidity", str(hum))
-		# except (IOError, TypeError) as e:
-		# 	print ("Error")
-		# Read ultrasonic ranger
-		# distance = ultrasonicRead(ultrasonicPIN)
-		# Print locally on console
-		# print(str(distance))
-		# Publish to topic "anrg-pi7/ultrasonicRanger"
-		# client.publish("anrg-pi7/ultrasonicRanger", distance)
 		time.sleep(1)
-
-		# If button is pressed
-		# if (grovepi.digitalRead(2) > 0):
-		#     # Publish the string "Button pressed!" to “anrg-pi#/button”
-		#     client.publish("anrg-pi7/button", "Button pressed!")
-            
-
+		
