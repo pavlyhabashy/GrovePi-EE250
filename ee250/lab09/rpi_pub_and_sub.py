@@ -17,7 +17,7 @@ def led_callback(client, userdata, message):
     if (str(message.payload, "utf-8") == "LED_toggle"):
         if (digitalRead(ledPIN) == 1):
             digitalWrite(ledPIN, 0)
-        else:
+        elif(digitalRead(ledPIN) == 0):
             digitalWrite(ledPIN, 1)
 
     # if str(message.payload, "utf-8") == "LED_ON":
@@ -32,18 +32,6 @@ def led_callback(client, userdata, message):
 def lcd_callback(client, userdata, message):
 	print(str(message.payload, "utf-8"))
 	setText(str(message.payload, "utf-8"))
-    # if str(message.payload, "utf-8") == "w":
-    #     print("w")
-    #     setText("w")
-    # elif str(message.payload, "utf-8") == "a":
-    #     print("a")
-    #     setText("a")
-    # elif str(message.payload, "utf-8") == "s":
-    #     print("s")
-    #     setText("s")
-    # elif str(message.payload, "utf-8") == "d":
-    #     print("d")
-    #     setText("d")
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -57,8 +45,6 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("anrg-pi7/lcd")
     client.message_callback_add("anrg-pi7/lcd", lcd_callback) 
 
-    # client.subscribe("anrg-pi7/temperature")
-    # client.message_callback_add("anrg-pi7/temperature", lcd_callback)
 
 # Default message callback. Please use custom callbacks.
 def on_message(client, userdata, msg):
@@ -79,7 +65,7 @@ if __name__ == '__main__':
 		[temp, hum] = dht(dhtPIN, 1)
 		print ("temp =", temp, "C\thumidity =", hum, "%")
 		client.publish("anrg-pi7/temperature", str(temp))
-		client.publish("anrg-pi7/humidity", "proving Devon wrong")
+		client.publish("anrg-pi7/humidity", str(hum))
 		# except (IOError, TypeError) as e:
 		# 	print ("Error")
 		# Read ultrasonic ranger
