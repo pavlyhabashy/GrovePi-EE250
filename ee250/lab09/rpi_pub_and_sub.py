@@ -13,8 +13,8 @@ dhtPIN = 7
 # LED callback
 def led_callback(client, userdata, message):
 
-
     if str(message.payload, "utf-8") == "LED":
+		print("LED")
         if (digitalRead(ledPIN) == 1):
             digitlaWrite(ledPIN, 0)
         else:
