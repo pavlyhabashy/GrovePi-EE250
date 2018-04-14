@@ -64,5 +64,5 @@ if __name__ == '__main__':
 		# Publish temperature and humidity to their respective topics
 		client.publish("anrg-pi7/temperature", str(temp))
 		client.publish("anrg-pi7/humidity", str(hum))
-		time.sleep(1)
+		time.sleep(1) 
 		
