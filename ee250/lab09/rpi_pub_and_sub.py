@@ -10,7 +10,8 @@ dhtPIN = 7
 
 # LED callback
 def led_callback(client, userdata, message):
-    print(str(message.payload, "utf-8"))
+	# Print message sent from button (for debugging)
+	# print(str(message.payload, "utf-8"))
     if (str(message.payload, "utf-8") == "LED_toggle"):
         if (digitalRead(ledPIN) == 1):
             digitalWrite(ledPIN, 0)
@@ -19,7 +20,10 @@ def led_callback(client, userdata, message):
 
 # LCD callback
 def lcd_callback(client, userdata, message):
-	print(str(message.payload, "utf-8"))
+	# Print text to console (for debugging)
+	# print(str(message.payload, "utf-8"))
+	
+	# Set text on LCD
 	setText(str(message.payload, "utf-8"))
 
 def on_connect(client, userdata, flags, rc):
@@ -28,11 +32,12 @@ def on_connect(client, userdata, flags, rc):
     # Subscribe to LED
     client.subscribe("anrg-pi7/led")
     client.message_callback_add("anrg-pi7/led", led_callback)
-    print("Connected to led topic")
+    print("Connected to LED topic")
 
     # Subscribe to LCD
     client.subscribe("anrg-pi7/lcd")
-    client.message_callback_add("anrg-pi7/lcd", lcd_callback) 
+    client.message_callback_add("anrg-pi7/lcd", lcd_callback)
+	print("Connected to LCD topic")
 
 
 # Default message callback. Please use custom callbacks.
@@ -50,9 +55,13 @@ if __name__ == '__main__':
 	time.sleep(1)
 	setRGB(250,250,250)
 	while True:
-		# try:
+		# Read temperature and humidity
 		[temp, hum] = dht(dhtPIN, 1)
-		print ("temp =", temp, "C\thumidity =", hum, "%")
+		
+		# Print to temperature and humidity to console (for debugging)
+		# print ("temp =", temp, "C\thumidity =", hum, "%")
+		
+		# Publish temperature and humidity to their respective topics
 		client.publish("anrg-pi7/temperature", str(temp))
 		client.publish("anrg-pi7/humidity", str(hum))
 		time.sleep(1)
