@@ -62,7 +62,7 @@ if __name__ == '__main__':
 		# print ("temp =", temp, "C\thumidity =", hum, "%")
 		
 		# Publish temperature and humidity to their respective topics
-		client.publish("anrg-pi7/temperature", str(temp))
-		client.publish("anrg-pi7/humidity", str(hum))
+		client.publish("anrg-pi7/temperature", str(temp + "C"))
+		client.publish("anrg-pi7/humidity", str(hum + "%"))
 		time.sleep(1) 
 		
